@@ -4,8 +4,8 @@
         <style>
 /*body {background-color:black;}*/
 body {
- background-image:linear-gradient(white, #5499C7);
- background-color: #cccccc;
+ background-image:linear-gradient(black, #01012A);
+ 
 }
 .heading
             {
@@ -26,8 +26,9 @@ body {
 /*  display: inline-block;*/
   border-radius: 10px;
  /* box-sizing: border-box;*/
-  background-color: white;
-  border-color: white;
+  background-color:#5E6075;
+  border-color:#5E6075;
+  opacity: 75%;
 
  
 }
@@ -40,9 +41,10 @@ body {
 
 input[type=submit] {
   width: 20%;
-  background-color: #4CAF50;
+background-color: #181B29;
+    border: 2px solid #4CAF50; 
   align-content: center;
-  color: white;
+  color:white;
   padding: 14px 20px;
   border: none;
   border-radius: 10px;
@@ -52,10 +54,12 @@ input[type=submit] {
   display: flex;
   justify-content: center;
   text-align: center;
+  font-weight: 850;
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+  background-color: #BEC7FF;
+  color:#00001E;
 }
 
 form {
@@ -75,7 +79,43 @@ video {
   top: 0;
   left: 0;
 }
-            
+::placeholder
+{
+  color: white;
+}
+input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+        color: white;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #5E6075;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+    .radio
+    {
+      color: white;
+    }
+
 
 
 
@@ -92,7 +132,7 @@ video {
 </video> -->
 
    <div class="heading">
-   <img src="heading.png" alt="Girl in a jacket" style="width:1200px;height:100px;">
+   <img src="headd.png" alt="Girl in a jacket" style="width:1200px;height:100px;">
    <div class="center">
  <!--  <h1 class="contact">Contact us! </h1> -->
   <form >
@@ -100,8 +140,20 @@ video {
     <input type="text" id="1" name="Input1" placeholder="Input1">
     <input type="text" id="2" name="Input2" placeholder="Input2">
      <input type="text" id="3" name="Input3" placeholder="Input3">
+<div class="radio">
+<input type="radio" id="fcfs" name="fcfs" value="fcfs">
+<label for="fcfs">First Come First Serve</label><br>
+<input type="radio" id="sjf" name="sjf" value="sjf">
+<label for="sjf">Shortest Job First</label><br>
+<input type="radio" id="srtf" name="srtf" value="srtf">
+<label for="srtf">Shortest Remaining Time First</label><br>
+<input type="radio" id="rr" name="rr" value="rr">
+<label for="rr">Round Robbin</label>
+</div>
+
      
     <input type="submit" value="SUBMIT">
+  
   </form>
 </div>
 
