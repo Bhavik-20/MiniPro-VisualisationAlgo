@@ -5,19 +5,19 @@
 /*body {background-color:black;}*/
 body {
  background-image:linear-gradient(black, #01012A);
- 
+ color: white;
 }
 .heading
-            {
-                align-content: center;
-                margin-top: 5px;
-                margin-left: 70px;
-                padding-top: 30px;
-                padding-right: 20px;
-                padding-bottom: 10px;
-                padding-left: 20px;
-                
-            }
+	{
+	    align-content: center;
+	    margin-top: 5px;
+	    margin-left: 70px;
+	    padding-top: 30px;
+	    padding-right: 20px;
+	    padding-bottom: 10px;
+	    padding-left: 20px;
+	    
+	}
   input[type=text], select {
   color: white;
   width: 100%;
@@ -29,9 +29,8 @@ body {
   background-color:#5E6075;
   border-color:#5E6075;
   opacity: 75%;
+	}
 
- 
-}
 .center {
   margin: auto;
   width: 30%;
@@ -41,8 +40,8 @@ body {
 
 input[type=submit] {
   width: 20%;
-background-color: #181B29;
-    border: 2px solid #4CAF50; 
+  background-color: #181B29;
+  border: 2px solid #4CAF50; 
   align-content: center;
   color:white;
   padding: 14px 20px;
@@ -115,52 +114,63 @@ input[type='radio']:after {
     {
       color: white;
     }
-
-
-
-
+    p
+    {
+    	color: white;
+    	font-size: 20;
+    }
 </style>
-    </head>
     
-    <body>
-
+</head>
+<body>
 
 <!-- <video id="videoBG" loop autoplay muted>
   <source src="video.webm" type="video/webm">
   <source src="video.ogg" type="video/ogg">
   <source src="video.mp4" type="video/mp4">
 </video> -->
+<?php 
+  $error_num="";
+  if ($_SERVER["REQUEST_METHOD"] == "POST") 
+    {
+    	$num=$_POST['number'];
+    	if (!empty($num))
+    	{
+    		$num = $_POST['number'];
+    		setcookie("number_pro", $num, time() + (86400 * 30), "/");
+    		header("Location: page2.php");
+    	}
+    	else
+    	{
+    		$error_num = " Please enter number of processes";
+    	}
+    	
+    }
 
+ ?>
    <div class="heading">
    <img src="headd.png" alt="Girl in a jacket" style="width:1200px;height:100px;">
    <div class="center">
- <!--  <h1 class="contact">Contact us! </h1> -->
-  <form >
-    
-    <input type="text" id="1" name="Input1" placeholder="Input1">
-    <input type="text" id="2" name="Input2" placeholder="Input2">
-     <input type="text" id="3" name="Input3" placeholder="Input3">
-<div class="radio">
-<input type="radio" id="fcfs" name="fcfs" value="fcfs">
-<label for="fcfs">First Come First Serve</label><br>
-<input type="radio" id="sjf" name="sjf" value="sjf">
-<label for="sjf">Shortest Job First</label><br>
-<input type="radio" id="srtf" name="srtf" value="srtf">
-<label for="srtf">Shortest Remaining Time First</label><br>
-<input type="radio" id="rr" name="rr" value="rr">
-<label for="rr">Round Robbin</label>
-</div>
-
-     
-    <input type="submit" value="SUBMIT">
-  
-  </form>
-</div>
-
-
-   
-        
-   
-        
-    </body>
+   <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    <input type="text" id="1" name="number" placeholder="Enter number of Processes"><div><?php echo $error_num; ?>
+    <br><br>
+    <p>Select the algorithm to visualise:</p>
+		<div class="radio">
+			<input type="radio" id="fcfs" name="fcfs" value="fcfs">
+			<label for="fcfs">First Come First Serve</label>
+			<br><br>
+			<input type="radio" id="sjf" name="sjf" value="sjf">
+			<label for="sjf">Shortest Job First</label>
+			<br><br>
+			<input type="radio" id="srtf" name="srtf" value="srtf">
+			<label for="srtf">Shortest Remaining Time First</label>
+			<br><br>
+			<input type="radio" id="rr" name="rr" value="rr">
+			<label for="rr">Round Robbin</label>
+			<br><br>
+		</div>
+ 	<input type="submit" value="SUBMIT">
+	</form>
+</div>      
+</body>
 </html>
