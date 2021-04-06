@@ -15,19 +15,28 @@ $algo = $_SESSION["algo"];
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
 
+    <style>
+        #navbarSupportedContent{
+                color: white;
+        }
+    </style>
+
     <!-- Canvas JS -->
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </head>
   <body>
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Mini Project</a>
-      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"> -->
-
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="page1.php">Select a different process</a>
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </header>
+    <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark" >
+    <a class="navbar-brand" href="#">Mini Project</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="page1.php">Select a different process</a>
+      </li>
+  </div>
+  </nav>
 
     <div class="container-fluid">
       <div class="row">
@@ -176,7 +185,8 @@ $algo = $_SESSION["algo"];
               }
             }
             for(var i=1; i<=total; i++){
-                var label_  = String.fromCharCode(65+i-1);
+                //var label_  = String.fromCharCode(65+i-1);
+                var label_ = "P"+i;
                 var burst   = parseInt(script_burst[i],10);
                 var arrival = parseInt(script_arrival[i],10);
                 var process = new Process(i-1, arrival, burst);

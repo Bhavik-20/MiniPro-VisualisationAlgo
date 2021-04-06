@@ -4,6 +4,7 @@ session_start();
 <html>
     <head>
         <title>Home Page</title>
+        <link rel='stylesheet' type='text/css' href='page1.css' />
         <style>
 /*body {background-color:black;}*/
 body {
@@ -86,8 +87,9 @@ video {
   color: white;
 }
 input[type='radio']:after {
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
         border-radius: 15px;
         top: -2px;
         left: -1px;
@@ -101,8 +103,9 @@ input[type='radio']:after {
     }
 
     input[type='radio']:checked:after {
-        width: 15px;
-        height: 15px;
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
         border-radius: 15px;
         top: -2px;
         left: -1px;

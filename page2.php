@@ -29,7 +29,7 @@ body
 }
  input[type=number], select {
   color: white;
-  width: 10%;
+  width: 20%;
   padding: 12px 20px;
   margin: 8px 0;
   border-radius: 10px;
