@@ -15,7 +15,7 @@ $quantum = $_SESSION["quantum_value"];
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #navbarSupportedContent{
                 color: white;
@@ -26,66 +26,47 @@ $quantum = $_SESSION["quantum_value"];
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </head>
   <body>
+    <!-- Header -->
     <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark" >
-    <a class="navbar-brand" href="#">Mini Project</a>
+    <a class="navbar-brand" href="#">Mini Project - Visualising CPU Scheduling Algorithms</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a class="nav-link" href="page1.php">Select a different process</a>
+        <a class="nav-link" href="page1.php" >Select a different process</a>
+        <!-- style="color:white;" -->
       </li>
   </div>
   </nav>
 
     <div class="container-fluid">
       <div class="row">
+        <!-- Left Bar -->
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link" id='fcfs' href="#">
-                  First Come First Serve
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id='srjf' href="#">
-                  Shortest Job First
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id='srtf' href="#">
-                  Shortest Remaining First
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" id='round-robin' href="#">
-                  Round Robin
-                </a>
-              </li>
-            </ul>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-1" id="tq">
+                <!-- Time Quantum - 2 seconds -->
+              </div>
+            </div>
           </div>
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">CPU Scheduling Algorithms</h1>
+            <h1 class="h2" id="algo" >CPU Scheduling Algorithm</h1>
+            <button type="button" id="regenerate" class="btn btn-success"> <i class="fa fa-play" style="margin-right: 5px"></i> Run</button>
             <div class="btn-toolbar" id="timer">
               Current Time - 0 seconds
             </div>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group me-1">
-                Time Quantum - 2 seconds
-              </div>
-            </div>
+            
           </div>
 
-          <div class="my-4 w-100" width="900" style='height: 340%;' id="chartContainer">
+          <div class="my-4 w-100" width="900" style='height: 600%;' id="chartContainer">
           </div>
-          <div class="d-flex justify-content-center mt-0">
-            <button type="button" id="regenerate" class="btn btn-success">Regenerate</button>
-          </div>
+        
         </main>
       </div>
     </div>
@@ -93,6 +74,7 @@ $quantum = $_SESSION["quantum_value"];
       var chart, total, max, min, queue, processes, quant = 2;
       var script_arrival;
       var script_burst ;
+      
         //Process class to store data of a process
         class Process{
             constructor(idx, arrival, burst){
@@ -168,7 +150,14 @@ $quantum = $_SESSION["quantum_value"];
             });
             chart.render();
 
+            var labels = [];
+            for(var i=1; i <=total; i++)
+            {
+                labels[i] = "P"+i;
+            }
+
             [min, processes]   = [1, []];
+            // Sort
             for(var i = 1 ; i < total  ; i++)
             {
               for(var j = i+1 ; j <= total ; j++)
@@ -182,6 +171,10 @@ $quantum = $_SESSION["quantum_value"];
                   const temp2 = script_burst[i];
                   script_burst[i] = script_burst[j];
                   script_burst[j] = temp2;
+
+                  const temp3 = labels[i];
+                  labels[i] = labels[j];
+                  labels[j]=temp3;
                 }
               }
             }
@@ -194,8 +187,10 @@ $quantum = $_SESSION["quantum_value"];
                 min         = arrival+1;
 
                 processes.push(process);
-                chart.data[1].dataPoints.push({label: label_+"(" + arrival + ")", y: 0});
-                chart.data[0].dataPoints.push({label: label_+"(" + arrival + ")", y: burst});
+                // chart.data[1].dataPoints.push({label: labels[i], y: 0});
+                // chart.data[0].dataPoints.push({label: labels[i], y: burst});
+                chart.data[1].dataPoints.push({label: labels[i]+"(" + arrival + ")", y: 0});
+                chart.data[0].dataPoints.push({label: labels[i]+"(" + arrival + ")", y: burst});
             }
             chart.render();
         }
@@ -360,18 +355,23 @@ $quantum = $_SESSION["quantum_value"];
         
         if(script_algo === "fcfs")
         {
+          document.getElementById("algo").innerHTML = "First Come First Serve";
           firstComeFirstServe();
         }
         else if(script_algo === "srjf")
         {
+          document.getElementById("algo").innerHTML = "Shortest Job First";
           shortestJobFirst();
         }
         else if(script_algo === "srtf")
         {
+          document.getElementById("algo").innerHTML = "Shortest Remaining Time First";
           shortestRemainingTimeFirst();
         }
         else if(script_algo === "round-robin")
         {
+          document.getElementById("algo").innerHTML = "Round Robin";
+          document.getElementById("tq").innerHTML = "Time Quantum: <?php echo $quantum ?>";
           roundRobin();
         }
         };
