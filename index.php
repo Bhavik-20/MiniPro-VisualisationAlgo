@@ -1,18 +1,18 @@
 <?php 
 session_start();
 $burst = $_SESSION["burst_array"];
-// echo "Hihadsihfif".$burst["burst1"];
+$arrival = $_SESSION["arrival_array"];
+$num = $_SESSION["number_pro"];
+$algo = $_SESSION["algo"];
  ?>
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Scheduling Algorithms Visualizer</title>
+    <title>Mini Project</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="index.css" rel="stylesheet">
 
     <!-- Canvas JS -->
@@ -20,8 +20,11 @@ $burst = $_SESSION["burst_array"];
   </head>
   <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Mini Project</a>
-      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <!-- <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Mini Project</a>
+      <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"> -->
+
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="page1.php">Select a different process</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
     </header>
@@ -78,7 +81,8 @@ $burst = $_SESSION["burst_array"];
     </div>
     <script >
       var chart, total, max, min, queue, processes, quant = 2;
-     
+      var script_arrival;
+      var script_burst ;
         //Process class to store data of a process
         class Process{
             constructor(idx, arrival, burst){
@@ -121,7 +125,10 @@ $burst = $_SESSION["burst_array"];
         function generateProcesses() {
             document.getElementById("timer").innerHTML = "Current Time - " + 0 + " seconds";
             [min, max] = [15, 20];
-            total =  Math.floor(Math.random() * (max - min + 1)) + min;
+            total = <?php echo $num ?>;
+            script_arrival = <?php echo json_encode($arrival); ?>;
+            script_burst = <?php echo json_encode($burst); ?>;
+             // Math.floor(Math.random() * (max - min + 1)) + min;
             chart = new CanvasJS.Chart("chartContainer", {
                 axisX:{
                     title: "---Arrival Time-->"
@@ -152,11 +159,27 @@ $burst = $_SESSION["burst_array"];
             chart.render();
 
             [min, processes]   = [1, []];
-            for(var i=0; i<total; i++){
-                var label_  = String.fromCharCode(65+i);
-                var burst   = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
-                var arrival = Math.floor(Math.random() * 3) + min - 1;
-                var process = new Process(i, arrival, burst);
+            for(var i = 1 ; i < total  ; i++)
+            {
+              for(var j = i+1 ; j <= total ; j++)
+              {
+                  if (script_arrival[i] > script_arrival[j])
+                { 
+                  const temp = script_arrival[i];
+                  script_arrival[i] = script_arrival[j];
+                  script_arrival[j] = temp;
+
+                  const temp2 = script_burst[i];
+                  script_burst[i] = script_burst[j];
+                  script_burst[j] = temp2;
+                }
+              }
+            }
+            for(var i=1; i<=total; i++){
+                var label_  = String.fromCharCode(65+i-1);
+                var burst   = parseInt(script_burst[i],10);
+                var arrival = parseInt(script_arrival[i],10);
+                var process = new Process(i-1, arrival, burst);
                 min         = arrival+1;
 
                 processes.push(process);
@@ -252,53 +275,7 @@ $burst = $_SESSION["burst_array"];
             })();
         }
 
-
-
-        //Calling of above Functions
-        window.onload                                   = generateProcesses();
-        document.getElementById("regenerate").onclick   = function() {generateProcesses();};
-        document.getElementById("fcfs").onclick         = function() {firstComeFirstServe();};
-        document.getElementById("srjf").onclick         = function() {shortestJobFirst();};
-
-    </script>
-    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-  </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--         //Implementation of Shortest Remaining Time First Algortihm
+                //Implementation of Shortest Remaining Time First Algortihm
         function shortestRemainingTimeFirst(){
             var [ctr, time] = [0, 0];
             quant = 1;
@@ -359,8 +336,74 @@ $burst = $_SESSION["burst_array"];
                     }, wait);
                 }
             })();
-        } -->
+        }
+
+        var script_algo = "<?php echo $algo; ?>";
+        script_algo = String(script_algo);
+        //Calling of above Functions
+        window.onload                                   = generateProcesses();
+        document.getElementById("regenerate").onclick   = function() {generateProcesses();};
+        
+        if(script_algo === "fcfs")
+        {
+          firstComeFirstServe();
+        }
+        else if(script_algo === "srjf")
+        {
+          shortestJobFirst();
+        }
+        else if(script_algo === "srtf")
+        {
+          shortestRemainingTimeFirst();
+        }
+        else if(script_algo === "round-robin")
+        {
+          roundRobin();
+        }
+        
+        // document.getElementById("fcfs").onclick         = function() {firstComeFirstServe();};
+        // document.getElementById("srjf").onclick         = function() {shortestJobFirst();};
+        // document.getElementById("srtf").onclick         = function() {shortestRemainingTimeFirst();};
+        // document.getElementById("round-robin").onclick  = function() {roundRobin();}; 
+
+    </script>
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+  </body>
+</html>
 
 
-<!-- document.getElementById("srtf").onclick         = function() {shortestRemainingTimeFirst();}; -->
-<!-- document.getElementById("round-robin").onclick  = function() {roundRobin();}; -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

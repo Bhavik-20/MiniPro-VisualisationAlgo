@@ -39,8 +39,8 @@ body
 }
 input[type=submit] {
   width: 10%;
-background-color: #181B29;
-    border: 2px solid #4CAF50; 
+  background-color: #181B29;
+  border: 2px solid #4CAF50; 
   align-content: center;
   color:white;
   padding: 14px 20px;
@@ -79,30 +79,30 @@ input[type=submit]:hover {
     $burst_error = array();
     $arrival_value = array();
     $burst_value = array();
-    $num=$_COOKIE["number_pro"];
+    $num=$_SESSION["number_pro"];
     for ($x = 1; $x <= $num; $x++) {
-        $arrival_error['arrival'.$x] = '';
-        $arrival_value['arrival'.$x] = '';
-        $burst_error['burst'.$x] = '';
-        $burst_value['burst'.$x] = '';
+        $arrival_error[$x] = '';
+        $arrival_value[$x] = '';
+        $burst_error[$x] = '';
+        $burst_value[$x] = '';
     }  
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
     if (isset($_POST['submit'])) {
     	
         for ($x = 1; $x <= $num; $x++) {
-            if (empty($_POST['arrival'.$x])) {
-                $arrival_error['arrival'.$x] = 'This field cannot be empty';
+            if (empty($_POST["arrival".$x])) {
+                $arrival_error[$x] = 'This field cannot be empty';
             }
             else {
-                $arrival_value['arrival'.$x] = $_POST['arrival'.$x];
+                $arrival_value[$x] = $_POST["arrival".$x];
             }
     
-            if (empty($_POST['burst'.$x])) {
-                $burst_error['burst'.$x] = 'This field cannot be empty';
+            if (empty($_POST["burst".$x])) {
+                $burst_error[$x] = 'This field cannot be empty';
             }
             else {
-                $burst_value['burst'.$x] = $_POST['burst'.$x];
+                $burst_value[$x] = $_POST["burst".$x];
             }
         }
         // echo $burst_value["burst1"];
@@ -124,8 +124,8 @@ input[type=submit]:hover {
                     ?>
                     <label>Process <?php echo $x?>:</label>
                     <input type="number" name="<?php echo "arrival".$x?>" min = "0" max = "15"
-                     value="<?php echo $arrival_value['arrival'.$x]; ?>"><br>
-                     <div><?php echo $arrival_error['arrival'.$x]; ?></div><br>
+                     value="<?php echo $arrival_value[$x]; ?>"><br>
+                     <div><?php echo $arrival_error[$x]; ?></div><br>
                 <?php } ?>
                 </center>
             </div>
@@ -134,8 +134,8 @@ input[type=submit]:hover {
                 <?php for ($x = 1; $x <= $num; $x++) { ?>
                     <label>Process <?php echo $x?>:</label>
                     <input type="number" name="<?php echo "burst".$x?>" min = "0" max = "15"
-                     value="<?php echo $burst_value['burst'.$x] ?>"><br>
-                     <div><?php echo $burst_error['burst'.$x]; ?></div><br>
+                     value="<?php echo $burst_value[$x] ?>"><br>
+                     <div><?php echo $burst_error[$x]; ?></div><br>
                 <?php } ?>
                 </center>
             </div>

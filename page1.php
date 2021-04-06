@@ -1,3 +1,6 @@
+<?php 
+session_start();
+ ?>
 <html>
     <head>
         <title>Home Page</title>
@@ -137,7 +140,10 @@ input[type='radio']:after {
     	if (!empty($num))
     	{
     		$num = $_POST['number'];
-    		setcookie("number_pro", $num, time() + (86400 * 30), "/");
+        $_SESSION["number_pro"]=$num;
+        $_SESSION["algo"]=$_POST["algo"];  
+    		// setcookie("number_pro", $num, time() + (86400 * 30), "/");
+
     		header("Location: page2.php");
     	}
     	else
@@ -156,16 +162,16 @@ input[type='radio']:after {
     <br><br>
     <p>Select the algorithm to visualise:</p>
 		<div class="radio">
-			<input type="radio" id="fcfs" name="fcfs" value="fcfs">
+			<input type="radio" id="fcfs" name="algo" value="fcfs" checked="true">
 			<label for="fcfs">First Come First Serve</label>
 			<br><br>
-			<input type="radio" id="sjf" name="sjf" value="sjf">
+			<input type="radio" id="sjf" name="algo" value="srjf">
 			<label for="sjf">Shortest Job First</label>
 			<br><br>
-			<input type="radio" id="srtf" name="srtf" value="srtf">
+			<input type="radio" id="srtf" name="algo" value="srtf">
 			<label for="srtf">Shortest Remaining Time First</label>
 			<br><br>
-			<input type="radio" id="rr" name="rr" value="rr">
+			<input type="radio" id="rr" name="algo" value="round-robin">
 			<label for="rr">Round Robbin</label>
 			<br><br>
 		</div>
