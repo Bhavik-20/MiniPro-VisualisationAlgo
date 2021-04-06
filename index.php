@@ -4,6 +4,7 @@ $burst = $_SESSION["burst_array"];
 $arrival = $_SESSION["arrival_array"];
 $num = $_SESSION["number_pro"];
 $algo = $_SESSION["algo"];
+$quantum = $_SESSION["quantum_value"];
  ?>
 <!doctype html>
 <html lang="en">
@@ -321,7 +322,10 @@ $algo = $_SESSION["algo"];
 
         //Implementation of Round Robin Algortihm
         function roundRobin(){
-            [quant, queue] = [2, new Queue()];
+            quant = "<?php echo $quantum ?>";
+            quant = parseInt(quant);
+            queue           = new Queue;
+            // [quant, queue] = [2, new Queue()];
             queue.enqueue(processes[0]);
             var [i, time] = [1, processes[0].arrivalTime];
             document.getElementById("timer").innerHTML = "Current Time - " + time + " seconds";
@@ -352,7 +356,7 @@ $algo = $_SESSION["algo"];
         script_algo = String(script_algo);
         //Calling of above Functions
         window.onload                                   = generateProcesses();
-        document.getElementById("regenerate").onclick   = function() {generateProcesses();};
+        document.getElementById("regenerate").onclick   = function() {generateProcesses();
         
         if(script_algo === "fcfs")
         {
@@ -370,6 +374,7 @@ $algo = $_SESSION["algo"];
         {
           roundRobin();
         }
+        };
         
         // document.getElementById("fcfs").onclick         = function() {firstComeFirstServe();};
         // document.getElementById("srjf").onclick         = function() {shortestJobFirst();};

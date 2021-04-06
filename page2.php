@@ -79,6 +79,8 @@ input[type=submit]:hover {
     $burst_error = array();
     $arrival_value = array();
     $burst_value = array();
+    $quant_err="";
+    $quant_value="";
     $num=$_SESSION["number_pro"];
     for ($x = 1; $x <= $num; $x++) {
         $arrival_error[$x] = '';
@@ -104,11 +106,20 @@ input[type=submit]:hover {
             else {
                 $burst_value[$x] = $_POST["burst".$x];
             }
+            if(empty($_POST["quantum"]))
+            {
+              $quant_err = "This field cannot be empty";
+            } 
+            else
+            {
+              $quant_value=$_POST["quantum"];
+            }
         }
         // echo $burst_value["burst1"];
         if (!array_filter($arrival_error) && !array_filter($burst_error)) {
         	$_SESSION["arrival_array"]=$arrival_value;
         	$_SESSION["burst_array"]=$burst_value;
+          $_SESSION["quantum_value"]=$quant_value;
             header("Location: index.php");
         }
     }
@@ -139,6 +150,14 @@ input[type=submit]:hover {
                 <?php } ?>
                 </center>
             </div>
+            <?php if($_SESSION["algo"] == "round-robin") {?>
+            <center>
+              <label>Time Quantum:</label>
+              <input type="number" name="quantum" min = "0" max = "15" value="<?php echo $quant_value ?>">
+              <div><?php echo $quant_err; ?></div><br>
+              <br>
+            </center>
+            <?php } ?>
         </div>
             <input type="submit" name="submit" value="Submit">
     </form>
