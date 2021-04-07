@@ -332,6 +332,144 @@ $quantum = $_SESSION["quantum_value"];
             return queue.front();
         }
 
+        function printStatsSJF(){
+             var rt=[];
+             var wt=[];
+             var tat=[];
+             for (var i = 1; i <=total; i++)
+             {
+                rt[i] = parseInt(script_burst[i]);
+             }
+             var complete = 0;
+             var t = 0;
+             var minm = 9999;
+             var shortest = 0;
+             var finish_time;
+             var check = false;
+             while (complete != total) {
+                for (var j = 1; j <= total; j++) {
+                   if ((parseInt(script_arrival[j]) <= t) && (rt[j] < minm) && rt[j] > 0) {
+                      minm = rt[j];
+                      shortest = j;
+                      check = true;
+                   }
+                }
+                if (check == false) {
+                   t=t+1;
+                   continue;
+                }
+                // decrementing the remaining time
+                rt[shortest]=rt[shortest]-1;
+                minm = rt[shortest];
+                if (minm == 0)
+                   minm = 9999;
+                   // If a process gets completely
+                   // executed
+                   if (rt[shortest] == 0) {
+                      complete=complete+1;
+                      check = false;
+                      finish_time = t + 1;
+                      // Calculate waiting time
+                      wt[shortest] = finish_time - parseInt(script_burst[shortest]) - parseInt(script_arrival[shortest]);
+                      if (wt[shortest] < 0)
+                         wt[shortest] = 0;
+                   }
+                   // Increment time
+                   t++;
+             }
+            
+            for(var i = 1; i<=total;i++)
+            {
+              tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
+              document.getElementById("P"+i).innerHTML=labels[i];
+              document.getElementById("at"+i).innerHTML=script_arrival[i];
+              document.getElementById("bt"+i).innerHTML=script_burst[i];
+              document.getElementById("wt"+i).innerHTML=wt[i];
+              document.getElementById("tat"+i).innerHTML=tat[i];
+            }
+            const sum_wt = wt.reduce((a, b) => a + b, 0);
+            const sum_tat = tat.reduce((a, b) => a + b, 0);
+            var avg_wt=sum_wt/total;
+            var avg_tat=sum_tat/total;
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;  
+        }
+
+        function printStatsSRTF(){
+          var wt=[];
+          var tat=[];
+          var start_time=[];
+          var completion_time=[];
+          var is_completed=[];
+          var burst_remaining=[]; // remaining time
+          is_completed[0]=0;
+           for(var i=1; i<=total; i++)
+            {
+              is_completed[i]=0;
+              burst_remaining[i]= parseInt(script_burst[i]);
+            }
+            var current_time = 0;
+            var completed = 0;
+            var prev = 0;
+
+            while(completed != total) {
+                var idx = -1;
+                var mn = 9999;
+                for(var i = 1; i <= total; i++) {
+                    if(parseInt(script_arrival[i]) <= current_time && is_completed[i] == 0) {
+                        if(parseInt(burst_remaining[i]) < mn) {
+                            mn = parseInt(burst_remaining[i]);
+                            idx = i;
+                        }
+                        if(parseInt(burst_remaining[i]) == mn) {
+                            if(parseInt(script_arrival[i]) < parseInt(script_arrival[idx])) {
+                                mn = parseInt(burst_remaining[i]);
+                                idx = i;
+                            }
+                        }
+                    }
+                }
+
+                if(idx != -1) {
+                    if(parseInt(burst_remaining[idx]) == parseInt(script_burst[idx])) {
+                        start_time[idx] = current_time;
+                        total_idle_time = total_idle_time+start_time[idx] - prev;
+                    }
+                    burst_remaining[idx] = burst_remaining[idx] - 1;
+                    current_time=current_time+1;
+                    prev = current_time;
+                    
+                    if(parseInt(burst_remaining[idx]) == 0) {
+                        completion_time[idx] = current_time;
+                        tat[idx] = completion_time[idx] - parseInt(script_arrival[idx]);
+                        wt[idx] = tat[idx] - parseInt(script_burst[idx]);                
+
+                        is_completed[idx] = 1;
+                        completed=completed+1;
+                    }
+                }
+                else {
+                     current_time=current_time+1;
+                }  
+            }
+
+             for(var i = 1; i<=total;i++)
+            {
+              document.getElementById("P"+i).innerHTML=labels[i];
+              document.getElementById("at"+i).innerHTML=script_arrival[i];
+              document.getElementById("bt"+i).innerHTML=script_burst[i];
+              document.getElementById("wt"+i).innerHTML=wt[i];
+              document.getElementById("tat"+i).innerHTML=tat[i];
+            }
+            const sum_wt = wt.reduce((a, b) => a + b, 0);
+            const sum_tat = tat.reduce((a, b) => a + b, 0);
+            var avg_wt=sum_wt/total;
+            var avg_tat=sum_tat/total;
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
+        }
+
+
         //Implementation of First Come First Serve Algortihm
         function firstComeFirstServe(){
             
@@ -488,11 +626,13 @@ $quantum = $_SESSION["quantum_value"];
         {
           document.getElementById("algo").innerHTML = "Shortest Job First";
           shortestJobFirst();
+          printStatsSJF();
         }
         else if(script_algo === "srtf")
         {
           document.getElementById("algo").innerHTML = "Shortest Remaining Time First";
           shortestRemainingTimeFirst();
+          printStatsSRTF();
         }
         else if(script_algo === "round-robin")
         {
