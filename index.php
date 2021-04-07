@@ -250,6 +250,71 @@ $quantum = $_SESSION["quantum_value"];
           document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
         }
 
+        function printStatsRR()
+        {
+            var wt=[];
+            var tat=[];
+            wt[1] = 0;
+            var rem_bt=[];
+            for (var i = 1 ; i <=total ; i++)
+            {
+                rem_bt[i] = parseInt(script_burst[i]);
+            }
+          
+            var t = 0; // Current time
+          
+            while (1)
+            {
+                var done = true;
+
+                for (var i = 1 ; i <=total; i++)
+                {
+                    if (rem_bt[i] > 0)
+                    {
+                        done = false;
+          
+                        if (parseInt(rem_bt[i]) > parseInt(quant))
+                        {
+                            t += parseInt(quant);
+                            rem_bt[i] -= parseInt(quant);
+                        }
+
+                        else
+                        {
+                            t = t + parseInt(rem_bt[i]);
+                            wt[i] = t - parseInt(script_burst[i]);
+                            rem_bt[i] = 0;
+                        }
+                    }
+                }
+                if (done == true)
+                  break;
+            }
+    
+          
+            for (var i = 1; i <= total ; i++)
+            {
+                tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
+            }
+
+            for(var i = 1; i<=total;i++)
+            {
+              tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
+              document.getElementById("P"+i).innerHTML=labels[i];
+              document.getElementById("at"+i).innerHTML=script_arrival[i];
+              document.getElementById("bt"+i).innerHTML=script_burst[i];
+              document.getElementById("wt"+i).innerHTML=wt[i];
+              document.getElementById("tat"+i).innerHTML=tat[i];
+            }
+            const sum_wt = wt.reduce((a, b) => a + b, 0);
+            const sum_tat = tat.reduce((a, b) => a + b, 0);
+            var avg_wt=sum_wt/total;
+            var avg_tat=sum_tat/total;
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt; 
+
+        }
+
 
 
         //A helper function for FCFS and round-robin alortihm
@@ -434,6 +499,7 @@ $quantum = $_SESSION["quantum_value"];
           document.getElementById("algo").innerHTML = "Round Robin";
           document.getElementById("tq").innerHTML = "Time Quantum: <?php echo $quantum ?>";
           roundRobin();
+          printStatsRR();
         }
         };
         
