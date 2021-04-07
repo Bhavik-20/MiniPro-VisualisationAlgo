@@ -5,7 +5,7 @@ $arrival = $_SESSION["arrival_array"];
 $num = $_SESSION["number_pro"];
 $algo = $_SESSION["algo"];
 $quantum = $_SESSION["quantum_value"];
- ?>
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,6 +19,11 @@ $quantum = $_SESSION["quantum_value"];
     <style>
         #navbarSupportedContent{
                 color: white;
+        }
+        table, th, td 
+        {
+          border: 1px solid black;
+          border-collapse: collapse;
         }
     </style>
 
@@ -47,8 +52,36 @@ $quantum = $_SESSION["quantum_value"];
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
             <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-toolbar" id="timer">
+              Current Time - 0 seconds
+              </div>
               <div class="btn-group me-1" id="tq">
                 <!-- Time Quantum - 2 seconds -->
+              </div>
+              <br><br>
+              <div>
+                <table style="width:100%">
+                    <tr>
+                      <th>PID</th>
+                      <th>AT</th> 
+                      <th>BT</th>
+                      <th>WT</th>
+                      <th>TAT</th>
+                    </tr>
+                    <?php for($i=1;$i<=$num;$i++){ ?>
+                    <tr>
+                      <td id="<?php echo 'P'.$i; ?>"></td>
+                      <td id="<?php echo 'at'.$i; ?>"></td>
+                      <td id="<?php echo 'bt'.$i; ?>"></td>
+                      <td id="<?php echo 'wt'.$i; ?>"></td>
+                      <td id="<?php echo 'tat'.$i; ?>"></td>
+                    </tr>
+                  <?php } ?>
+                </table>
+              </div>
+              <div>
+                <br><p id="avg_wt"></p><br>
+                <p id="avg_tat"></p><br>
               </div>
             </div>
           </div>
@@ -58,13 +91,10 @@ $quantum = $_SESSION["quantum_value"];
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2" id="algo" >CPU Scheduling Algorithm</h1>
             <button type="button" id="regenerate" class="btn btn-success"> <i class="fa fa-play" style="margin-right: 5px"></i> Run</button>
-            <div class="btn-toolbar" id="timer">
-              Current Time - 0 seconds
-            </div>
-            
+                        
           </div>
 
-          <div class="my-4 w-100" width="900" style='height: 600%;' id="chartContainer">
+          <div class="my-4 w-100" width="900" style='height: 700px;' id="chartContainer">
           </div>
         
         </main>
@@ -74,6 +104,7 @@ $quantum = $_SESSION["quantum_value"];
       var chart, total, max, min, queue, processes, quant = 2;
       var script_arrival;
       var script_burst ;
+      var labels = [];
       
         //Process class to store data of a process
         class Process{
@@ -150,7 +181,7 @@ $quantum = $_SESSION["quantum_value"];
             });
             chart.render();
 
-            var labels = [];
+            
             for(var i=1; i <=total; i++)
             {
                 labels[i] = "P"+i;
@@ -179,8 +210,6 @@ $quantum = $_SESSION["quantum_value"];
               }
             }
             for(var i=1; i<=total; i++){
-                //var label_  = String.fromCharCode(65+i-1);
-                var label_ = "P"+i;
                 var burst   = parseInt(script_burst[i],10);
                 var arrival = parseInt(script_arrival[i],10);
                 var process = new Process(i-1, arrival, burst);
@@ -193,7 +222,35 @@ $quantum = $_SESSION["quantum_value"];
                 chart.data[0].dataPoints.push({label: labels[i]+"(" + arrival + ")", y: burst});
             }
             chart.render();
+            
         }
+
+        function printStatsFCFS(){
+            var wt=[];
+            var tat=[];
+            wt[1] = 0;
+            for (var  i = 2; i <= total; i++ )
+            {
+              wt[i] =  parseInt(script_burst[i-1]) + parseInt(wt[i-1]) ;
+            }
+          for(var i = 1; i<=total;i++)
+          {
+            tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
+            document.getElementById("P"+i).innerHTML=labels[i];
+            document.getElementById("at"+i).innerHTML=script_arrival[i];
+            document.getElementById("bt"+i).innerHTML=script_burst[i];
+            document.getElementById("wt"+i).innerHTML=wt[i];
+            document.getElementById("tat"+i).innerHTML=tat[i];
+          }
+          const sum_wt = wt.reduce((a, b) => a + b, 0);
+          const sum_tat = tat.reduce((a, b) => a + b, 0);
+          var avg_wt=sum_wt/total;
+          var avg_tat=sum_tat/total;
+          document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
+          document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
+        }
+
+
 
         //A helper function for FCFS and round-robin alortihm
         function fcfsHelper(){
@@ -212,6 +269,7 @@ $quantum = $_SESSION["quantum_value"];
 
         //Implementation of First Come First Serve Algortihm
         function firstComeFirstServe(){
+            
             quant = 2;
             queue = new Queue();
             queue.enqueue(processes[0]);
@@ -237,8 +295,10 @@ $quantum = $_SESSION["quantum_value"];
                     }, wait);
                 }
             })();
+            
         }
 
+      
         //Implementation of Shortest Job First Algortihm
         function shortestJobFirst(){
             quant = 2;
@@ -357,6 +417,7 @@ $quantum = $_SESSION["quantum_value"];
         {
           document.getElementById("algo").innerHTML = "First Come First Serve";
           firstComeFirstServe();
+          printStatsFCFS();
         }
         else if(script_algo === "srjf")
         {
