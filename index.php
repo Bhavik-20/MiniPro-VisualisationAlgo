@@ -396,62 +396,65 @@ $quantum = $_SESSION["quantum_value"];
         }
 
         function printStatsSRTF(){
-          var wt=[];
-          var tat=[];
-          var start_time=[];
-          var completion_time=[];
-          var is_completed=[];
-          var burst_remaining=[]; // remaining time
-          is_completed[0]=0;
-           for(var i=1; i<=total; i++)
-            {
-              is_completed[i]=0;
-              burst_remaining[i]= parseInt(script_burst[i]);
-            }
-            var current_time = 0;
-            var completed = 0;
-            var prev = 0;
-
-            while(completed != total) {
-                var idx = -1;
-                var mn = 9999;
-                for(var i = 1; i <= total; i++) {
-                    if(parseInt(script_arrival[i]) <= current_time && is_completed[i] == 0) {
-                        if(parseInt(burst_remaining[i]) < mn) {
-                            mn = parseInt(burst_remaining[i]);
-                            idx = i;
-                        }
-                        if(parseInt(burst_remaining[i]) == mn) {
-                            if(parseInt(script_arrival[i]) < parseInt(script_arrival[idx])) {
-                                mn = parseInt(burst_remaining[i]);
-                                idx = i;
-                            }
-                        }
-                    }
-                }
-
-                if(idx != -1) {
-                    if(parseInt(burst_remaining[idx]) == parseInt(script_burst[idx])) {
-                        start_time[idx] = current_time;
-                        total_idle_time = total_idle_time+start_time[idx] - prev;
-                    }
-                    burst_remaining[idx] = burst_remaining[idx] - 1;
-                    current_time=current_time+1;
-                    prev = current_time;
-                    
-                    if(parseInt(burst_remaining[idx]) == 0) {
-                        completion_time[idx] = current_time;
-                        tat[idx] = completion_time[idx] - parseInt(script_arrival[idx]);
-                        wt[idx] = tat[idx] - parseInt(script_burst[idx]);                
-
-                        is_completed[idx] = 1;
-                        completed=completed+1;
-                    }
-                }
-                else {
-                     current_time=current_time+1;
-                }  
-            }
+            var wt=[];
+            var tat=[];
+            
+            var rt=[];
+               
+                
+              for (var i = 0; i <=total ; i++)
+                  rt[i] = parseInt(script_burst[i]);
+             
+              var complete = 0;
+              var t = 0;
+              var minm = 9999;
+              var shortest = 0;
+              var finish_time;
+              var check = false;
+             
+              while (complete != total) {
+                  for (var j = 0; j <=total; j++) 
+                  {
+                      if ((parseInt(script_arrival[j]) <= t) &&(rt[j] < minm) && rt[j] > 0) {
+                          minm = rt[j];
+                          shortest = j;
+                          check = true;
+                      }
+                  }
+             
+                  if (check == false) {
+                      t++;
+                      continue;
+                  }
+             
+                  rt[shortest]--;
+             
+                  minm = rt[shortest];
+                  if (minm == 0)
+                      minm = 9999;
+             
+                  if (rt[shortest] == 0) {
+             
+                      complete++;
+                      check = false;
+             
+                      finish_time = t + 1;
+             
+                      
+                      wt[shortest] = finish_time - parseInt(script_burst[shortest]) - parseInt(script_arrival[shortest]);
+             
+                      if (wt[shortest] < 0)
+                          wt[shortest] = 0;
+                  }
+                  
+                  t++;
+              }
+               
+            
+                
+                for (var i = 1; i <= total; i++)
+                    tat[i] = parseInt(script_burst[i]) + wt[i];
+            
 
              for(var i = 1; i<=total;i++)
             {
@@ -672,7 +675,62 @@ $quantum = $_SESSION["quantum_value"];
 
 
 
+<!-- var start_time=[];
+          var completion_time=[];
+          var is_completed=[];
+          var burst_remaining=[]; // remaining time
+          is_completed[0]=0;
+           for(var i=1; i<=total; i++)
+            {
+              is_completed[i]=0;
+              burst_remaining[i]= parseInt(script_burst[i]);
+            }
+            var current_time = 0;
+            var completed = 0;
+            var prev = 0;
 
+            while(completed != total) {
+                var idx = -1;
+                var mn = 9999;
+                for(var i = 1; i <= total; i++) 
+                {
+                    if(parseInt(script_arrival[i]) <= current_time && is_completed[i] == 0) {
+                        if(parseInt(burst_remaining[i]) < mn) {
+                            mn = parseInt(burst_remaining[i]);
+                            idx = i;
+                        }
+                        if(parseInt(burst_remaining[i]) == mn) {
+                            if(parseInt(script_arrival[i]) < parseInt(script_arrival[idx])) {
+                                mn = parseInt(burst_remaining[i]);
+                                idx = i;
+                            }
+                        }
+                    }
+                }
+
+                if(idx != -1) {
+                    if(parseInt(burst_remaining[idx]) == parseInt(script_burst[idx])) 
+                    {
+                        start_time[idx] = current_time;
+                        total_idle_time = total_idle_time+start_time[idx] - prev;
+                    }
+                    burst_remaining[idx] = burst_remaining[idx] - 1;
+                    current_time=current_time+1;
+                    prev = current_time;
+                    
+                    if(parseInt(burst_remaining[idx]) == 0) {
+                        completion_time[idx] = current_time;
+                        tat[idx] = completion_time[idx] - parseInt(script_arrival[idx]);
+                        wt[idx] = tat[idx] - parseInt(script_burst[idx]);                
+
+                        is_completed[idx] = 1;
+                        completed=completed+1;
+                    }
+                }
+                else {
+                     current_time=current_time+1;
+                }  
+            } -->
 
 
 
