@@ -2,31 +2,14 @@
  session_start();
 ?>
 <html>
+<head>
+  <link rel='stylesheet' type='text/css' href='page1.css' />
 <style>
 * {
   box-sizing: border-box;
   color: white;
 }
-body
-{
-	background-image:linear-gradient(black, #01012A);
-}
 
-/* Create two equal columns that floats next to each other */
-.column {
-  float: left;
-  width: 50%;
-  padding: 10px;
-  align-content: center;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  clear: both;
-  margin-left:60px;
-  align-items: center;
-}
  input[type=number], select {
   color: white;
   width: 20%;
@@ -37,6 +20,7 @@ body
   border-color:#5E6075;
   opacity: 75%;
 }
+
 input[type=submit] {
   width: 10%;
   background-color: #181B29;
@@ -54,26 +38,17 @@ input[type=submit] {
   text-align: center;
   font-weight: 850;
 }
-.heading
-{
-    align-content: center;
-    margin-top: 5px;
-    margin-left: 40px;
-    padding-top: 30px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    
-}
 
 input[type=submit]:hover {
   background-color: white;
   color:grey;
 }
 </style>
+</head>
 <body>
      <div class="heading">
-    <img src="headd.png" alt="Girl in a jacket" style="width:1200px;height:100px;">
+      <center><img src="headd.png" alt="Title" style="width:80%"></center>
+    </div>
     <?php
     $arrival_error = array();
     $burst_error = array();
@@ -126,25 +101,42 @@ input[type=submit]:hover {
     } 
  
 ?>
-</div>
+<br><br>
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
         <div class="row">
             <div class="column">
-                <center><h4>Arrival Time</h4>
-                <?php for ($x = 1; $x <= $num; $x++) { 
+                <center><h2>Arrival Time</h2>
+
+                  <label>Process 1:</label>
+                    <input type="number" name="arrival1" min = "0" max = "15"
+                     value="<?php echo $arrival_value[1]; ?>"><br>
+                     <div><?php echo $arrival_error[1]; ?></div>
+                    <!--  Checkbox -->
+                  <input type="checkbox" name="cpya" onclick="CopyAllA(this.form,<?php echo $num?>)">
+                  <em>Check this box if all Arrival times are same.</em><br>
+                  <br>
+                <?php for ($x = 2; $x <= $num; $x++) { 
                     ?>
                     <label>Process <?php echo $x?>:</label>
-                    <input type="number" name="<?php echo "arrival".$x?>" min = "0" max = "15"
+                    <input type="number" name="<?php echo "arrival".$x?>" id="<?php echo 'a'.$x?>" min = "0" max = "15"
                      value="<?php echo $arrival_value[$x]; ?>"><br>
                      <div><?php echo $arrival_error[$x]; ?></div><br>
                 <?php } ?>
                 </center>
             </div>
             <div class="column">
-                <center><h4>Burst Time</h4>
-                <?php for ($x = 1; $x <= $num; $x++) { ?>
+                <center><h2>Burst Time</h2>
+                  <label>Process 1:</label>
+                    <input type="number" name="burst1" min = "0" max = "15"
+                     value="<?php echo $burst_value[1]; ?>"><br>
+                     <div><?php echo $burst_error[1]; ?></div>
+                    <!--  Checkbox -->
+                  <input type="checkbox" name="cpyb" onclick="CopyAllB(this.form,<?php echo $num?>)">
+                  <em>Check this box if all Burst times are same.</em><br>
+                    <br>
+                <?php for ($x = 2; $x <= $num; $x++) { ?>
                     <label>Process <?php echo $x?>:</label>
-                    <input type="number" name="<?php echo "burst".$x?>" min = "0" max = "15"
+                    <input type="number" name="<?php echo "burst".$x?>" id="<?php echo 'b'.$x?>" min = "0" max = "15"
                      value="<?php echo $burst_value[$x] ?>"><br>
                      <div><?php echo $burst_error[$x]; ?></div><br>
                 <?php } ?>
@@ -162,4 +154,23 @@ input[type=submit]:hover {
             <input type="submit" name="submit" value="Submit">
     </form>
 </body>
+<script>
+  
+  function CopyAllA(f,n) {
+  if(f.cpya.checked == true) {
+    for(var i =2; i<=n;i++)
+    {
+      document.getElementById("a"+i).setAttribute('value',f.arrival1.value); 
+    }
+  }
+}
+function CopyAllB(f,n) {
+  if(f.cpyb.checked == true) {
+    for(var i =2; i<=n;i++)
+    {
+      document.getElementById("b"+i).setAttribute('value',f.burst1.value); 
+    }
+  }
+}
+</script>
 </html>

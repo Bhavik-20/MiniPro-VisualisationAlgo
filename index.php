@@ -25,6 +25,14 @@ $quantum = $_SESSION["quantum_value"];
           border: 1px solid black;
           border-collapse: collapse;
         }
+
+        th,td{
+          padding: 3px;
+          text-align: left;
+        }
+        .hidden {
+  display: none;
+}
     </style>
 
     <!-- Canvas JS -->
@@ -33,7 +41,7 @@ $quantum = $_SESSION["quantum_value"];
   <body>
     <!-- Header -->
     <nav class="navbar sticky-top navbar-expand navbar-dark bg-dark" >
-    <a class="navbar-brand" href="#">Mini Project - Visualising CPU Scheduling Algorithms</a>
+    <a class="navbar-brand" href="#" style="padding-left: 10px;"> Mini Project - Visualising CPU Scheduling Algorithms</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -52,15 +60,42 @@ $quantum = $_SESSION["quantum_value"];
         <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
           <div class="position-sticky pt-3">
             <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-toolbar" id="timer">
-              Current Time - 0 seconds
+              <div class="border-bottom" style="padding: 5px;">
+              <h2> Performance </h2>
               </div>
-              <div class="btn-group me-1" id="tq">
-                <!-- Time Quantum - 2 seconds -->
+              <div style="padding: 20px">
+                Legend:
+                <table style="width:100%"> 
+                  <tr>
+                    <td> PID </td>
+                    <td> Process ID </td>
+                  </tr>
+                  <tr>
+                    <td> AT </td>
+                    <td> Arrival Time </td>
+                  </tr>
+                  <tr>
+                    <td> BT </td>
+                    <td> Burst Time </td>
+                  </tr>
+                  <tr>
+                    <td> WT </td>
+                    <td> Waiting Time </td>
+                  </tr>
+                  <tr>
+                    <td> TAT </td>
+                    <td> Turn Around Time </td>
+                  </tr>
+
+                </table>
               </div>
-              <br><br>
-              <div>
-                <table style="width:100%">
+              
+              <div style="padding: 10px">
+              <button type="button" id="performance" class="btn btn-success">Show/Hide Performance</button>
+            </div>
+         
+              <div id="displaytable" class="hidden" style="padding: 10px">
+                <table style="width:100%;">
                     <tr>
                       <th>PID</th>
                       <th>AT</th> 
@@ -78,9 +113,7 @@ $quantum = $_SESSION["quantum_value"];
                     </tr>
                   <?php } ?>
                 </table>
-              </div>
-              <div>
-                <br><p id="avg_wt"></p><br>
+                <br><p id="avg_wt"></p>
                 <p id="avg_tat"></p><br>
               </div>
             </div>
@@ -90,6 +123,12 @@ $quantum = $_SESSION["quantum_value"];
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
             <h1 class="h2" id="algo" >CPU Scheduling Algorithm</h1>
+            <div class="btn-group me-1" id="tq">
+                <!-- Time Quantum - 2 seconds -->
+              </div>
+            <div class="btn-toolbar" id="timer" style="padding-top: 5px;">
+              Current Time - 0 seconds
+              </div>
             <button type="button" id="regenerate" class="btn btn-success"> <i class="fa fa-play" style="margin-right: 5px"></i> Run</button>
                         
           </div>
@@ -246,6 +285,8 @@ $quantum = $_SESSION["quantum_value"];
           const sum_tat = tat.reduce((a, b) => a + b, 0);
           var avg_wt=sum_wt/total;
           var avg_tat=sum_tat/total;
+          avg_wt = avg_wt.toFixed(4);
+          avg_tat = avg_tat.toFixed(4);// round to 4 dec places
           document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
           document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
         }
@@ -310,6 +351,8 @@ $quantum = $_SESSION["quantum_value"];
             const sum_tat = tat.reduce((a, b) => a + b, 0);
             var avg_wt=sum_wt/total;
             var avg_tat=sum_tat/total;
+            avg_wt = avg_wt.toFixed(4);
+            avg_tat = avg_tat.toFixed(4);// round to 4 dec places
             document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
             document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt; 
 
@@ -391,6 +434,8 @@ $quantum = $_SESSION["quantum_value"];
             const sum_tat = tat.reduce((a, b) => a + b, 0);
             var avg_wt=sum_wt/total;
             var avg_tat=sum_tat/total;
+            avg_wt = avg_wt.toFixed(4);
+            avg_tat = avg_tat.toFixed(4);// round to 4 dec places
             document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
             document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;  
         }
@@ -468,6 +513,8 @@ $quantum = $_SESSION["quantum_value"];
             const sum_tat = tat.reduce((a, b) => a + b, 0);
             var avg_wt=sum_wt/total;
             var avg_tat=sum_tat/total;
+            avg_wt = avg_wt.toFixed(4);
+            avg_tat = avg_tat.toFixed(4);// round to 4 dec places
             document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
             document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
         }
@@ -623,28 +670,56 @@ $quantum = $_SESSION["quantum_value"];
         {
           document.getElementById("algo").innerHTML = "First Come First Serve";
           firstComeFirstServe();
-          printStatsFCFS();
+         // printStatsFCFS();
         }
         else if(script_algo === "srjf")
         {
           document.getElementById("algo").innerHTML = "Shortest Job First";
           shortestJobFirst();
-          printStatsSJF();
+          //printStatsSJF();
         }
         else if(script_algo === "srtf")
         {
           document.getElementById("algo").innerHTML = "Shortest Remaining Time First";
           shortestRemainingTimeFirst();
-          printStatsSRTF();
+         // printStatsSRTF();
         }
         else if(script_algo === "round-robin")
         {
           document.getElementById("algo").innerHTML = "Round Robin";
           document.getElementById("tq").innerHTML = "Time Quantum: <?php echo $quantum ?>";
           roundRobin();
+         // printStatsRR();
+        }
+        };
+
+        document.getElementById("performance").onclick = function() {
+        var tablewrap = document.getElementById('displaytable');
+        tablewrap.classList.toggle('hidden')
+
+        if(script_algo === "fcfs")
+        {
+          document.getElementById("algo").innerHTML = "First Come First Serve";
+          printStatsFCFS();
+        }
+        else if(script_algo === "srjf")
+        {
+          document.getElementById("algo").innerHTML = "Shortest Job First";
+          printStatsSJF();
+        }
+        else if(script_algo === "srtf")
+        {
+          document.getElementById("algo").innerHTML = "Shortest Remaining Time First";
+          printStatsSRTF();
+        }
+        else if(script_algo === "round-robin")
+        {
+          document.getElementById("algo").innerHTML = "Round Robin";
+          document.getElementById("tq").innerHTML = "Time Quantum: <?php echo $quantum ?>";
           printStatsRR();
         }
         };
+        
         
         // document.getElementById("fcfs").onclick         = function() {firstComeFirstServe();};
         // document.getElementById("srjf").onclick         = function() {shortestJobFirst();};

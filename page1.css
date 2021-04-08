@@ -1,18 +1,108 @@
-* {
-  box-sizing: border-box;
-  color: white;
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+body {
+ background-image:linear-gradient(black, #01012A);
+ color: white;
 }
-body
+.heading
+  {
+     padding: 5px;
+     margin-bottom: 30px;
+      
+  }
+
+  .center{
+    border: 5px solid #BEC7FF;
+    border-radius: 20px;
+    width: 60%;
+    padding: 50px;
+    margin: 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+  }
+
+  .center p{
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+  }
+
+  input[type=text], select {
+  color: white;
+  font-size: 15px;
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border-radius: 10px;
+  background-color:#5E6075;
+  border-color:#5E6075;
+  opacity: 75%;
+  }::placeholder
 {
-	background-image:linear-gradient(black, #01012A);
+  color: white;
+};
+
+input[type=submit]:hover {
+  background-color: #BEC7FF;
+  color:#00001E;
 }
 
-/* Create two equal columns that floats next to each other */
+form {
+  border-radius: 20px;
+ padding-bottom: 50px
+  width: 600px;
+  height: 400px;
+  margin-top: -20px;
+
+
+}
+
+input[type='radio']:after {
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #d1d3d1;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+        color: white;
+    }
+
+    input[type='radio']:checked:after {
+        width: 10px;
+        height: 10px;
+        margin-right: 5px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: #5E6075;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 2px solid white;
+    }
+    .radio
+    {
+      color: white;
+    }
+    p
+    {
+      color: white;
+      font-size: 20;
+    }
+
+  /* Create two equal columns that floats next to each other */
 .column {
   float: left;
   width: 50%;
   padding: 10px;
   align-content: center;
+  font-family: 'Lato', sans-serif;
 }
 
 /* Clear floats after the columns */
@@ -22,46 +112,4 @@ body
   margin-left:60px;
   align-items: center;
 }
- input[type=text], select {
-  color: white;
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border-radius: 10px;
-  background-color:#5E6075;
-  border-color:#5E6075;
-  opacity: 75%;
-}
-input[type=submit] {
-  width: 10%;
-  background-color: #181B29;
-  border: 2px solid #4CAF50; 
-  align-content: center;
-  color:white;
-  padding: 14px 20px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin: auto;
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  font-weight: 850;
-}
-.heading
-{
-    align-content: center;
-    margin-top: 5px;
-    margin-left: 40px;
-    padding-top: 30px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    
-}
 
-input[type=submit]:hover {
-  background-color: white;
-  color:grey;
-}
