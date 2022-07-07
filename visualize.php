@@ -11,7 +11,7 @@ $quantum = $_SESSION["quantum_value"];
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Mini Project</title>
+    <title>MiniProject | Visualize</title>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="index.css" rel="stylesheet">

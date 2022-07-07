@@ -3,7 +3,7 @@ session_start();
  ?>
 <html>
     <head>
-        <title>Home Page</title>
+        <title>MiniProject | Home Page</title>
         <link rel='stylesheet' type='text/css' href='page1.css' />
         <style>
 /*body {background-color:black;}*/

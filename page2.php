@@ -4,6 +4,7 @@
 <html>
 <head>
   <link rel='stylesheet' type='text/css' href='page1.css' />
+  <title>MiniProject | Enter Time</title>
 <style>
 * {
   box-sizing: border-box;
@@ -105,7 +106,7 @@ input[type=submit]:hover {
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
         <div class="row">
             <div class="column">
-                <center><h2>Arrival Time</h2>
+                <center><h2>Arrival Time</h2> <span style="color:white;"><em>(in seconds)</em></span>
 
                   <label>Process 1:</label>
                     <input type="number" name="arrival1" min = "0" max = "15"
