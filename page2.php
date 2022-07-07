@@ -106,11 +106,12 @@ input[type=submit]:hover {
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
         <div class="row">
             <div class="column">
-                <center><h2>Arrival Time</h2> <span style="color:white;"><em>(in seconds)</em></span>
+                <center><h2>Arrival Time</h2> 
 
                   <label>Process 1:</label>
                     <input type="number" name="arrival1" min = "0" max = "15"
-                     value="<?php echo $arrival_value[1]; ?>"><br>
+                     value="<?php echo $arrival_value[1]; ?>"> <span style="color:white;"><em>secs</em></span>
+                     <br>
                      <div><?php echo $arrival_error[1]; ?></div>
                     <!--  Checkbox -->
                   <input type="checkbox" name="cpya" onclick="CopyAllA(this.form,<?php echo $num?>)">
@@ -120,7 +121,8 @@ input[type=submit]:hover {
                     ?>
                     <label>Process <?php echo $x?>:</label>
                     <input type="number" name="<?php echo "arrival".$x?>" id="<?php echo 'a'.$x?>" min = "0" max = "15"
-                     value="<?php echo $arrival_value[$x]; ?>"><br>
+                     value="<?php echo $arrival_value[$x]; ?>"> <span style="color:white;"><em>secs</em></span>
+                     <br>
                      <div><?php echo $arrival_error[$x]; ?></div><br>
                 <?php } ?>
                 </center>
