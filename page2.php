@@ -95,7 +95,7 @@ input[type=submit]:hover {
         	$_SESSION["arrival_array"]=$arrival_value;
         	$_SESSION["burst_array"]=$burst_value;
           $_SESSION["quantum_value"]=$quant_value;
-            header("Location: index.php");
+            header("Location: visualize.php");
         }
     }
     } 
