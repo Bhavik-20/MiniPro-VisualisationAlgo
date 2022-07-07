@@ -131,7 +131,8 @@ input[type=submit]:hover {
                 <center><h2>Burst Time</h2>
                   <label>Process 1:</label>
                     <input type="number" name="burst1" min = "0" max = "15"
-                     value="<?php echo $burst_value[1]; ?>"><br>
+                     value="<?php echo $burst_value[1]; ?>"> <span style="color:white;"><em>secs</em></span>
+                     <br>
                      <div><?php echo $burst_error[1]; ?></div>
                     <!--  Checkbox -->
                   <input type="checkbox" name="cpyb" onclick="CopyAllB(this.form,<?php echo $num?>)">
@@ -142,7 +143,7 @@ input[type=submit]:hover {
                     <input type="number" name="<?php echo "burst".$x?>" id="<?php echo 'b'.$x?>" min = "0" max = "15"
                      value="<?php echo $burst_value[$x] ?>"><br>
                      <div><?php echo $burst_error[$x]; ?></div><br>
-                <?php } ?>
+                <?php } ?> <span style="color:white;"><em>secs</em></span>
                 </center>
             </div>
             <?php if($_SESSION["algo"] == "round-robin") {?>
