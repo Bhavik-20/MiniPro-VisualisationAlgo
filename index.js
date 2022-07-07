@@ -43,9 +43,7 @@ function generateProcesses() {
     document.getElementById("timer").innerHTML = "Current Time - " + 0 + " seconds";
     [min, max] = [15, 20];
     total = Math.floor(Math.random() * (max - min + 1)) + min;
-    var ctx = document.getElementsByClassName("canvasjs-chart-canvas");
-    ctx.canvas.width = 300;
-    ctx.canvas.height = 300;
+    
     chart = new CanvasJS.Chart("chartContainer", {
         axisX:{
             title: "---Arrival Time-->"
