@@ -287,8 +287,8 @@ $quantum = $_SESSION["quantum_value"];
           var avg_tat=sum_tat/total;
           avg_wt = avg_wt.toFixed(4);
           avg_tat = avg_tat.toFixed(4);// round to 4 dec places
-          document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
-          document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
+          document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat+"s";
+          document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt+"s";
         }
 
         function printStatsRR()
@@ -353,8 +353,8 @@ $quantum = $_SESSION["quantum_value"];
             var avg_tat=sum_tat/total;
             avg_wt = avg_wt.toFixed(4);
             avg_tat = avg_tat.toFixed(4);// round to 4 dec places
-            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
-            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt; 
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat+"s";
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt+"s"; 
 
         }
 
@@ -436,8 +436,8 @@ $quantum = $_SESSION["quantum_value"];
             var avg_tat=sum_tat/total;
             avg_wt = avg_wt.toFixed(4);
             avg_tat = avg_tat.toFixed(4);// round to 4 dec places
-            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
-            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;  
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat+"s";
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt+"s";  
         }
 
         function printStatsSRTF(){
@@ -515,8 +515,8 @@ $quantum = $_SESSION["quantum_value"];
             var avg_tat=sum_tat/total;
             avg_wt = avg_wt.toFixed(4);
             avg_tat = avg_tat.toFixed(4);// round to 4 dec places
-            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat;
-            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt;
+            document.getElementById("avg_tat").innerHTML="Average TAT: "+avg_tat+"s";
+            document.getElementById("avg_wt").innerHTML="Average WT: "+avg_wt+"s";
         }
 
 

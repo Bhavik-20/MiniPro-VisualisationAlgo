@@ -141,9 +141,9 @@ input[type=submit]:hover {
                 <?php for ($x = 2; $x <= $num; $x++) { ?>
                     <label>Process <?php echo $x?>:</label>
                     <input type="number" name="<?php echo "burst".$x?>" id="<?php echo 'b'.$x?>" min = "0" max = "15"
-                     value="<?php echo $burst_value[$x] ?>"><br>
+                     value="<?php echo $burst_value[$x] ?>"> <span style="color:white;"><em>secs</em></span> <br>
                      <div><?php echo $burst_error[$x]; ?></div><br>
-                <?php } ?> <span style="color:white;"><em>secs</em></span>
+                <?php } ?> 
                 </center>
             </div>
             <?php if($_SESSION["algo"] == "round-robin") {?>
