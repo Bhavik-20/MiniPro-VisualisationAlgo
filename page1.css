@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 
-* {
+html {
  background-image:linear-gradient(black, #01012A);
  color: white;
  padding-bottom: 10px;
