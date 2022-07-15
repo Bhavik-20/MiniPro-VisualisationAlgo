@@ -13,7 +13,7 @@
 
  input[type=number], select {
   color: white;
-  width: 20%;
+  width: 25%;
   padding: 12px 20px;
   margin: 8px 0;
   border-radius: 10px;
