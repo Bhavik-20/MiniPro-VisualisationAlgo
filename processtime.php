@@ -34,6 +34,7 @@ input[type=submit] {
   cursor: pointer;
   margin: auto;
   margin-top: 15px;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   text-align: center;
