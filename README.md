@@ -8,7 +8,7 @@ This visualization tool can be used for measuring performance of different sched
 
 Our main aim is to make the understanding process of these algorithms easy for users which will be done by visualizing the working of each algorithm by making use of the CanvasJS library’s stacked column graphs.
 
-In this project we have created a visualization of 4 CPU Scheduling algorithms as follows:
+In this project we have created visualizations of 4 CPU Scheduling algorithms:
 1. First Come First Serve
 2. Shortest Job First
 3. Shortest Remaining Time First
