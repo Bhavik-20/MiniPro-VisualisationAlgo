@@ -46,7 +46,7 @@ input[type=submit] {
     	}
     	else
     	{
-    		$error_num = " Please enter number of processes";
+    		$error_num = " **Please enter number of processes**";
     	}
     	
     }

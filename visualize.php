@@ -133,7 +133,7 @@ $quantum = $_SESSION["quantum_value"];
                         
           </div>
 
-          <div class="my-4 w-100" style='height: 700px;' id="chartContainer">
+          <div class="my-4 w-80" style='height: 450px;' id="chartContainer">
           </div>
         
         </main>

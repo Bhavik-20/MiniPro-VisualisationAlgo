@@ -71,21 +71,21 @@ input[type=submit]:hover {
     	
         for ($x = 1; $x <= $num; $x++) {
             if (empty($_POST["arrival".$x])) {
-                $arrival_error[$x] = 'This field cannot be empty';
+                $arrival_error[$x] = '**This field cannot be empty**';
             }
             else {
                 $arrival_value[$x] = $_POST["arrival".$x];
             }
     
             if (empty($_POST["burst".$x])) {
-                $burst_error[$x] = 'This field cannot be empty';
+                $burst_error[$x] = '**This field cannot be empty**';
             }
             else {
                 $burst_value[$x] = $_POST["burst".$x];
             }
             if(empty($_POST["quantum"]))
             {
-              $quant_err = "This field cannot be empty";
+              $quant_err = "**This field cannot be empty**";
             } 
             else
             {
