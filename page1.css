@@ -3,6 +3,8 @@
 body {
  background-image:linear-gradient(black, #01012A);
  color: white;
+ height: fit-content;
+ padding-bottom: 10px;
 }
 .heading
   {

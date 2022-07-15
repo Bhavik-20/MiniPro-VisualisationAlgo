@@ -104,8 +104,8 @@ input[type=submit]:hover {
 ?>
 <br><br>
     <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
-        <div class="center">
-          <div class="row">
+        <center>
+          <div class="row" style="padding-left:50%; width:1000px;">
             <div class="column">
                 <center><h2>Arrival Time</h2> 
 
@@ -155,10 +155,10 @@ input[type=submit]:hover {
               <br>
             </center>
             <?php } ?>
-        
             <input type="submit" name="submit" value="Submit">
           </div>
-        </div>
+            </center>
+            <br>
     </form>
 </body>
 <script>
