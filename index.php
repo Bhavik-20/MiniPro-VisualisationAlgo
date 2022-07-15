@@ -42,7 +42,7 @@ input[type=submit] {
         $_SESSION["algo"]=$_POST["algo"];  
     		// setcookie("number_pro", $num, time() + (86400 * 30), "/");
 
-    		header("Location: page2.php");
+    		header("Location: processtime.php");
     	}
     	else
     	{
