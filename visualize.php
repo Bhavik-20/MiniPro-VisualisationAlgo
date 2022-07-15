@@ -221,16 +221,16 @@ $quantum = $_SESSION["quantum_value"];
             chart.render();
 
             
-            for(var i=1; i <=total; i++)
+            for(int i=1; i <=total; i++)
             {
                 labels[i] = "P"+i;
             }
 
             [min, processes]   = [1, []];
             // Sort
-            for(var i = 1 ; i < total  ; i++)
+            for(int i = 1 ; i < total  ; i++)
             {
-              for(var j = i+1 ; j <= total ; j++)
+              for(int j = i+1 ; j <= total ; j++)
               {
                   if (script_arrival[i] > script_arrival[j])
                 { 
@@ -248,7 +248,7 @@ $quantum = $_SESSION["quantum_value"];
                 }
               }
             }
-            for(var i=1; i<=total; i++){
+            for(int i=1; i<=total; i++){
                 var burst   = parseInt(script_burst[i],10);
                 var arrival = parseInt(script_arrival[i],10);
                 var process = new Process(i-1, arrival, burst);
