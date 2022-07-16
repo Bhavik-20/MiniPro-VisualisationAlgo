@@ -555,7 +555,7 @@ $quantum = $_SESSION["quantum_value"];
       
         //Implementation of Shortest Job First Algortihm
         function shortestJobFirst(){
-            quant = 2;
+            quant = 1;
             var time        = 0;
             var processed   = new Set();
             queue           = new Queue;
@@ -631,6 +631,7 @@ $quantum = $_SESSION["quantum_value"];
 
         //Implementation of Round Robin Algortihm
         function roundRobin(){
+            q = 1
             quant = "<?php echo $quantum ?>";
             quant = parseInt(quant);
             queue           = new Queue;
@@ -640,7 +641,7 @@ $quantum = $_SESSION["quantum_value"];
             document.getElementById("timer").innerHTML = "Current Time - " + time + " seconds";
             (function traverse() {
                 if(!queue.isEmpty()){
-                    var wait = Math.ceil(1000/quant);
+                    var wait = Math.ceil(1000/q);
                     setTimeout(function() {
                         var front = queue.front();
                         time += Math.min(front.burstTime-front.consumedTime, quant);
