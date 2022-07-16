@@ -151,7 +151,7 @@ input[type=submit]:hover {
             <?php if($_SESSION["algo"] == "round-robin") {?>
             <center>
               <label>Time Quantum:</label>
-              <input type="number" name="quantum" min = "0" max = "15" value="<?php echo $quant_value ?>">
+              <input type="number" name="quantum" min = "0" max = "15" value="<?php echo $quant_value ?>"> <span style="color:white;"><em>secs</em></span> 
               <div><?php echo $quant_err; ?></div><br>
               <br>
             </center>

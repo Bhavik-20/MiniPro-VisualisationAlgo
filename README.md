@@ -17,3 +17,41 @@ In this project we have created visualizations of 4 CPU Scheduling algorithms:
 Apart from visualization we have also calculated the performance metrics of each execution which can be seen in a tabular format. The table displays each process's arrival time, burst time, waiting time and turn around time. 
 
 The scope of the mini-project is limited to 15 processes for better visualisation and understanding, but this can be increased. The arrival and burst time inputs are restricted to a maximum of 15 seconds for the same reason.
+
+Examples:
+
+1. FCFS
+
+   | Process | AT | BT | WT | TAT |
+   |---------|----|----|----|-----|
+   |   P1    | 12 |  5 |  5 |  10 |
+   |   P2    | 10 |  5 |  2 |   7 |
+   |   P3    |  7 |  5 |  0 |   5 |
+
+2. SJF
+
+   | Process | AT | BT | WT | TAT |
+   |---------|----|----|----|-----|
+   |   P1    |  2 |  4 |  2 |   6 |
+   |   P2    |  2 |  7 |  6 |  13 |
+   |   P3    |  2 |  2 |  0 |   2 |
+   
+3. SRTF
+   
+   | Process | AT | BT | WT | TAT |
+   |---------|----|----|----|-----|
+   |   P1    |  1 | 14 | 18 |  32 |
+   |   P2    |  4 |  8 |  1 |   9 |
+   |   P3    |  6 |  9 |  7 |  16 |
+   |   P4    | 10 |  1 |  0 |   1 |
+
+4. RR
+
+    Time quantum: 2 secs
+
+   | Process | AT | BT | WT | TAT |
+   |---------|----|----|----|-----|
+   |   P1    |  1 | 14 | 18 |  32 |
+   |   P2    |  4 |  8 |  1 |   9 |
+   |   P3    |  6 |  9 |  7 |  16 |
+   |   P4    | 10 |  1 |  0 |   1 |

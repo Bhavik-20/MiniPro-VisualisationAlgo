@@ -193,10 +193,10 @@ $quantum = $_SESSION["quantum_value"];
              // Math.floor(Math.random() * (max - min + 1)) + min;
             chart = new CanvasJS.Chart("chartContainer", {
                 axisX:{
-                    title: "---Arrival Time-->"
+                    title: "---Arrival Time (s) -->"
                 },
                 axisY:{
-                    title: "---Burst Time-->",
+                    title: "---Burst Time (s) -->",
                     minimum: 0,
                     maximum: 20,
                     interval: 1
@@ -524,7 +524,7 @@ $quantum = $_SESSION["quantum_value"];
         //Implementation of First Come First Serve Algortihm
         function firstComeFirstServe(){
             
-            quant = 2;
+            quant = 1; //2
             queue = new Queue();
             queue.enqueue(processes[0]);
             var [i, time] = [1, processes[0].arrivalTime];
