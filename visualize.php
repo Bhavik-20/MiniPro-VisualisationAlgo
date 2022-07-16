@@ -232,7 +232,7 @@ $quantum = $_SESSION["quantum_value"];
             {
               for(var j = i+1 ; j <= total ; j++)
               {
-                  if (parseInt(script_arrival[i]) > parseInt(script_arrival[j]))
+                  if (parseInt(script_arrival[i]) > parseInt(script_arrival[j])
                 { 
                   const temp = script_arrival[i];
                   script_arrival[i] = script_arrival[j];
@@ -270,7 +270,7 @@ $quantum = $_SESSION["quantum_value"];
             wt[1] = 0;
             for (var  i = 2; i <= total; i++ )
             {
-              wt[i] =  parseInt(script_burst[i-1]) + parseInt(at[i-1]) - parseInt(at[i]);//changed the formula
+              wt[i] =  parseInt(script_burst[i-1]) + parseInt(at[i-1]) - parseInt(at[i]) ; //changed to this
             }
           for(var i = 1; i<=total;i++)
           {
