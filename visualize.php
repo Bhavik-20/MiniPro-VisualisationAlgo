@@ -335,7 +335,7 @@ $quantum = $_SESSION["quantum_value"];
   
             for(var i = 1; i<=total;i++)
             {
-              wt[i] -= (script_arrival[i] + 1); //Jugaad
+              wt[i] -= (parseInt(script_arrival[i]) + 1); //Jugaad
               tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
               document.getElementById("P"+i).innerHTML=labels[i];
               document.getElementById("at"+i).innerHTML=script_arrival[i];
