@@ -232,7 +232,7 @@ $quantum = $_SESSION["quantum_value"];
             {
               for(var j = i+1 ; j <= total ; j++)
               {
-                  if (script_arrival[i] > script_arrival[j])
+                  if (parseInt(script_arrival[i]) > parseInt(script_arrival[j]))
                 { 
                   const temp = script_arrival[i];
                   script_arrival[i] = script_arrival[j];
