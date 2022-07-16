@@ -270,7 +270,7 @@ $quantum = $_SESSION["quantum_value"];
             wt[1] = 0;
             for (var  i = 2; i <= total; i++ )
             {
-              wt[i] =  parseInt(script_burst[i-1]) + parseInt(wt[i-1]) ;
+              wt[i] =  parseInt(script_burst[i-1]) + parseInt(at[i-1]) - parseInt(at[i]);//changed the formula
             }
           for(var i = 1; i<=total;i++)
           {
