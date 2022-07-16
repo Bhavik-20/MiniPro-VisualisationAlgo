@@ -14,7 +14,7 @@ $quantum = $_SESSION["quantum_value"];
     <title>MiniProject | Visualize</title>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="index.css" rel="stylesheet">
+    <!-- <link href="page1.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         #navbarSupportedContent{
@@ -221,16 +221,16 @@ $quantum = $_SESSION["quantum_value"];
             chart.render();
 
             
-            for(int i=1; i <=total; i++)
+            for(var i=1; i <=total; i++)
             {
                 labels[i] = "P"+i;
             }
 
             [min, processes]   = [1, []];
             // Sort
-            for(int i = 1 ; i < total  ; i++)
+            for(var i = 1 ; i < total  ; i++)
             {
-              for(int j = i+1 ; j <= total ; j++)
+              for(var j = i+1 ; j <= total ; j++)
               {
                   if (script_arrival[i] > script_arrival[j])
                 { 
@@ -248,7 +248,7 @@ $quantum = $_SESSION["quantum_value"];
                 }
               }
             }
-            for(int i=1; i<=total; i++){
+            for(var i=1; i<=total; i++){
                 var burst   = parseInt(script_burst[i],10);
                 var arrival = parseInt(script_arrival[i],10);
                 var process = new Process(i-1, arrival, burst);
