@@ -268,13 +268,14 @@ $quantum = $_SESSION["quantum_value"];
             var wt=[];
             var tat=[];
             wt[1] = 0;
+            tat[1] = parseInt(script_burst[1]) + parseInt(wt[1]);
             for (var  i = 2; i <= total; i++ )
             {
-              wt[i] =  parseInt(script_burst[i-1]) + parseInt(script_arrival[i-1]) - parseInt(script_arrival[i]) ; //changed to this
+              wt[i] =  parseInt(tat[i-1]) + parseInt(script_arrival[i-1]) - parseInt(script_arrival[i]) ;
+              tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
             }
           for(var i = 1; i<=total;i++)
           {
-            tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
             document.getElementById("P"+i).innerHTML=labels[i];
             document.getElementById("at"+i).innerHTML=script_arrival[i];
             document.getElementById("bt"+i).innerHTML=script_burst[i];
