@@ -332,16 +332,11 @@ $quantum = $_SESSION["quantum_value"];
                 if (done == true)
                   break;
             }
-    
-          
-            for (var i = 1; i <= total ; i++)
-            {
-                tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
-            }
-
+  
             for(var i = 1; i<=total;i++)
             {
               tat[i] = parseInt(script_burst[i]) + parseInt(wt[i]);
+              wt[i] -= (script_arrival[i] + 1); //Jugaad
               document.getElementById("P"+i).innerHTML=labels[i];
               document.getElementById("at"+i).innerHTML=script_arrival[i];
               document.getElementById("bt"+i).innerHTML=script_burst[i];
@@ -631,7 +626,7 @@ $quantum = $_SESSION["quantum_value"];
 
         //Implementation of Round Robin Algortihm
         function roundRobin(){
-            q = 1
+            q = 1 // for speed
             quant = "<?php echo $quantum ?>";
             quant = parseInt(quant);
             queue           = new Queue;
