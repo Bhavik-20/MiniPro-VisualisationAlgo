@@ -8,6 +8,7 @@ This visualization tool can be used for measuring performance of different sched
 
 Our main aim is to make the understanding process of these algorithms easy for users which will be done by visualizing the working of each algorithm by making use of the CanvasJS library’s stacked column graphs.
 
+# Introduction
 In this project we have created visualizations of 4 CPU Scheduling algorithms:
 1. First Come First Serve
 2. Shortest Job First
@@ -18,7 +19,8 @@ Apart from visualization we have also calculated the performance metrics of each
 
 The scope of the mini-project is limited to 15 processes for better visualisation and understanding, but this can be increased. The arrival and burst time inputs are restricted to a maximum of 15 seconds for the same reason.
 
-Examples:
+# Examples:
+* Note: Only Arrival time (AT) and Burst time (BT) are required as inputs
 
 1. FCFS
 
@@ -56,3 +58,37 @@ Examples:
    |   P3    |  1 |  7 | 16 |  23 |
    |   P4    |  5 |  4 | 12 |  16 |
    |   P5    |  4 |  7 | 21 |  28 |
+
+# Tools and Databases
+* [XAMPP](https://www.apachefriends.org/download.html): Cross-platform web server solution stack package 
+<!-- * [MySQL](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/) -->
+
+# Languages Used:
+* [PHP](https://www.php.net/): Backend
+* HTML, CSS, JS: Frontend
+
+# Getting Started
+
+**---------- You can skip the installation of this project and directly access it [here](https://visualization-of-algos.herokuapp.com/) ----------**
+
+
+**Step 1: Install XAMPP using the link provided above.**
+* Alternatively follow this [video](https://www.youtube.com/watch?v=O6T8YPUmyj8)
+
+**Step 2: Clone the repository in the htdocs folder.**
+* For eg if your XAMPP has been installed in C:\Program Files\xampp then navigate to the htdocs folder present in the above path and run the following command:
+
+```
+$ git clone https://github.com/Bhavik-20/Peek-A-Book.git
+```
+
+**Step 3: Enable XAMPP enviroment**
+* Run the Apache and MySql Module in XAMPP as shown below
+<img src ="readme-contents/st3-Xampp.png" width = "500" height = "300">
+<!-- ![](readme-contents/st3-Xampp.png) -->
+
+**Step 4: Run Application**
+* Open any browser and enter the following URL:
+```
+$ localhost/MiniPro-VisualisationAlgo/index.php
+```
