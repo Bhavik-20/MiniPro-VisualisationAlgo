@@ -70,7 +70,7 @@ The scope of the mini-project is limited to 15 processes for better visualisatio
 
 # Getting Started
 
-**---------- You can skip the installation of this project and directly access it [here](https://visualization-of-algos.herokuapp.com/){:target="_blank"} ----------**
+**---------- You can skip the installation of this project and directly access it [here](https://visualization-of-algos.herokuapp.com/){:target="_blank" rel="noopener"} ----------**
 
 
 **Step 1: Install XAMPP using the link provided above.**
