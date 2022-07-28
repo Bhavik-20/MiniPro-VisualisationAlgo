@@ -1,7 +1,8 @@
 # MiniPro-VisualisationAlgo
-Mini Project Sem 6 : CPU Scheduling Algorithms Visualisation
+<!-- Mini Project Sem 6 : CPU Scheduling Algorithms Visualisation -->
 
-**This project involves development of a visualization technique for CPU scheduling algorithms.** Scheduling is a fundamental operating-system function. In a single-processor system, only one process can run at a time; any other must wait until the CPU is free and can be rescheduled. Thus, its scheduling is central to operating-system design
+**This project involves development of a visualization technique for CPU scheduling algorithms.** 
+Scheduling is a fundamental operating-system function. In a single-processor system, only one process can run at a time; any other must wait until the CPU is free and can be rescheduled. Thus, its scheduling is central to operating-system design
 This project has been developed as a comprehensive tool which runs a simulation in real time, and generates useful data to be used for evaluation. A user-friendly and mouse driven graphical user interface has been integrated by making use of the Canvas JS library which helps in visualization the processes. 
 
 This visualization tool can be used for measuring performance of different scheduling algorithms, preemptive and non-preemptive, which helps in better understanding and training of students in domains like Operating System where there is very little practical visualization available, of the underlying system.
@@ -69,7 +70,7 @@ The scope of the mini-project is limited to 15 processes for better visualisatio
 
 # Getting Started
 
-**---------- You can skip the installation of this project and directly access it [here](https://visualization-of-algos.herokuapp.com/) ----------**
+**---------- You can skip the installation of this project and directly access it [here](https://visualization-of-algos.herokuapp.com/){:target="_blank"} ----------**
 
 
 **Step 1: Install XAMPP using the link provided above.**
@@ -79,7 +80,7 @@ The scope of the mini-project is limited to 15 processes for better visualisatio
 * For eg if your XAMPP has been installed in C:\Program Files\xampp then navigate to the htdocs folder present in the above path and run the following command:
 
 ```
-$ git clone https://github.com/Bhavik-20/Peek-A-Book.git
+$ https://github.com/Bhavik-20/MiniPro-VisualisationAlgo.git
 ```
 
 **Step 3: Enable XAMPP enviroment**
