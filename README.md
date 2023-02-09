@@ -1,4 +1,4 @@
-# MiniPro-VisualisationAlgo
+# [https://visualization-of-algos.herokuapp.com/](Mini Project-VisualisationAlgo)  
 <!-- Mini Project Sem 6 : CPU Scheduling Algorithms Visualisation -->
 
 **This project involves development of a visualization technique for CPU scheduling algorithms.** 
